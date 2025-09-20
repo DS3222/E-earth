@@ -1,14 +1,14 @@
 # ===========================
-# Stage 1: Build frontend (Vite)
+# Stage 1: Build frontend
 # ===========================
 FROM node:18 AS frontend-build
 WORKDIR /app/frontend
 
-# Install frontend dependencies
+# Install dependencies
 COPY frontend/package*.json ./
 RUN npm install
 
-# Copy all frontend files and build
+# Copy source and build
 COPY frontend/ ./
 RUN npm run build
 
@@ -26,7 +26,7 @@ RUN npm install
 # Copy backend code
 COPY backend/ ./
 
-# Copy built frontend (Vite = dist folder)
+# Copy frontend build output into backend/public
 COPY --from=frontend-build /app/frontend/dist ./public
 
 EXPOSE 10000
