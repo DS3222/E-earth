@@ -1,0 +1,1 @@
+import React from 'react';import { Link } from 'react-router-dom';export default function ArticleCard({a}){return (<div className='card'><h3>{a.title}</h3><p style={{color:'#6b7280'}}>{a.summary}</p><div style={{marginTop:12}}><Link to={'/article/'+a.id}>Read more →</Link></div></div>)}
