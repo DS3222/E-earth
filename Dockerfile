@@ -1,14 +1,23 @@
+# Step 1: Build frontend
+FROM node:18 AS frontend-build
+WORKDIR /app/frontend
+COPY frontend/package*.json ./
+RUN npm install
+COPY frontend/ ./
+RUN npm run build
+
+# Step 2: Setup backend
 FROM node:18
-
 WORKDIR /app
-
-# Copy backend
-COPY backend/ ./backend
-
+COPY backend/package*.json ./backend/
 WORKDIR /app/backend
+RUN npm install
 
-# Install dependencies (backend only, frontend is prebuilt)
-RUN npm install express
+# Copy backend code
+COPY backend/ ./ 
+
+# Copy built frontend into backend/public
+COPY --from=frontend-build /app/frontend/build ./public
 
 EXPOSE 10000
 CMD ["node", "server.js"]
