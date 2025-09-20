@@ -1,0 +1,1 @@
+document.getElementById('app').innerHTML = '<h1>It works on Render!</h1>';
