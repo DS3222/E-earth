@@ -4,14 +4,14 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 10000;
 
-// ✅ serve dist directly (copied to /app/backend/dist in Dockerfile)
+// ✅ serve static dist folder
 app.use(express.static(path.join(__dirname, "dist")));
 
 app.get("/api/hello", (req, res) => {
   res.json({ message: "Hello from E-earth backend" });
 });
 
-// Fallback — always return index.html
+// ✅ fallback for SPA
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
