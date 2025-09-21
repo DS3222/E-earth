@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 10000;
 
-// Serve the frontend build
+// ✅ Correct folder: serve frontend/dist
 app.use(express.static(path.join(__dirname, "frontend/dist")));
 
 app.get("*", (req, res) => {
