@@ -1,27 +1,23 @@
-# Stage 1 — build frontend
+# -------- Stage 1: Build Frontend --------
 FROM node:18 AS build-frontend
 WORKDIR /app/frontend
 
-# install deps
 COPY frontend/package*.json ./
 RUN npm install
 
-# copy rest of frontend and build
 COPY frontend/ ./
 RUN npm run build
 
-# Stage 2 — backend runtime
+# -------- Stage 2: Run Backend --------
 FROM node:18
 WORKDIR /app/backend
 
-# install backend deps
 COPY backend/package*.json ./
 RUN npm install
 
-# copy backend source
 COPY backend/ ./
 
-# ✅ copy frontend dist directly into /app/backend/dist
+# ✅ copy built frontend into backend/dist
 COPY --from=build-frontend /app/frontend/dist ./dist
 
 EXPOSE 10000
