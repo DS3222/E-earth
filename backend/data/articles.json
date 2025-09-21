@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "title": "How to fix a PC motherboard",
+    "summary": "Quick guide to test PSU, RAM, BIOS resets.",
+    "content": "<p>Step-by-step motherboard troubleshooting.</p>"
+  },
+  {
+    "id": "2",
+    "title": "Afdutl \u2014 Movie star profile",
+    "summary": "Biography and filmography of Afdutl.",
+    "content": "<p>Sample celebrity profile content.</p>"
+  },
+  {
+    "id": "3",
+    "title": "Best apps for students 2025",
+    "summary": "List of apps to increase productivity.",
+    "content": "<p>App list with descriptions.</p>"
+  }
+]
