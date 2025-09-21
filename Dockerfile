@@ -1,33 +1,25 @@
-# ===========================
-# Stage 1: Build frontend (Vite)
-# ===========================
-FROM node:18 AS frontend-build
+# ---------- Build stage ----------
+FROM node:18 AS build
+WORKDIR /app
+
+# Copy frontend and build it
+COPY frontend ./frontend
 WORKDIR /app/frontend
-
-# Install dependencies
-COPY frontend/package*.json ./
 RUN npm install
-
-# Copy frontend source and build
-COPY frontend/ ./
 RUN npm run build
 
-# ===========================
-# Stage 2: Setup backend
-# ===========================
+# ---------- Production stage ----------
 FROM node:18
 WORKDIR /app
 
-# Install backend dependencies
-COPY backend/package*.json ./backend/
+# Copy backend
+COPY backend ./backend
+
+# Copy built frontend dist into backend so Express can serve it
+COPY --from=build /app/frontend/dist ./backend/frontend/dist
+
 WORKDIR /app/backend
 RUN npm install
 
-# Copy backend source
-COPY backend/ ./
-
-# Copy Vite build (dist) into backend/public
-COPY --from=frontend-build /app/frontend/dist ./public
-
-EXPOSE 10000
+# Start backend
 CMD ["node", "server.js"]
