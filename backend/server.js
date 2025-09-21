@@ -1,20 +1,22 @@
-import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const express = require('express');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 10000;
 
-// ✅ Correct folder: serve frontend/dist
-app.use(express.static(path.join(__dirname, "frontend/dist")));
+// Serve static files from backend/frontend/dist
+app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend/dist/index.html"));
+// Example API
+app.get('/api/hello', (req, res) => {
+  res.json({ message: 'Hello from E-earth backend' });
+});
+
+// SPA fallback — serve index.html for any non-API route
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend/dist', 'index.html'));
 });
 
 app.listen(PORT, () => {
-  console.log(`✅ Server running on port ${PORT}`);
+  console.log(`✅ Server listening on port ${PORT}`);
 });
