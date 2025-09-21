@@ -1,11 +1,14 @@
+import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
 
-const express = require("express");
-const path = require("path");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
-
 const PORT = process.env.PORT || 10000;
 
-// Serve frontend
+// Serve frontend dist
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
 app.get("*", (req, res) => {
@@ -13,5 +16,5 @@ app.get("*", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
 });
