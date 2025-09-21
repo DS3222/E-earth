@@ -1,0 +1,1 @@
+document.getElementById('app').innerHTML = '<h1>Welcome to E-Earth</h1>';
