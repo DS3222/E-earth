@@ -1,7 +1,0 @@
-services:
-  - type: web
-    name: e-earth
-    env: docker
-    plan: free
-    autoDeploy: true
-
